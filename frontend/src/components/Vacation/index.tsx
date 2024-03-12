@@ -26,7 +26,6 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
 
   /** Call deleteVacation function from the TableContext and handle the response.
    *   @param {string} id - The id of the vacation to be deleted.
-   *   @returns {void} - No return value.
    *   @throws {Error} - If an error occurs during the deletion process.
    *   @function setLoading() Control state of loading while the async function is running.
    */

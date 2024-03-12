@@ -11,9 +11,14 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces'
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
+/** Initiate a PDF download based on the current data present in the database. */
 const Download: React.FC = () => {
   const [loading, setLoading] = useState(false)
 
+  /** Provide a schema for PDF generation.
+   *   @param {IVacation[]} data - The vacation data provided by the parent component.
+   *   @returns {TDocumentDefinitions} - A schema for PDF generation.
+   */
   const createTableSchema = (data: IVacation[]): TDocumentDefinitions => {
     const bodyData = data.map((element) => [
       { text: element.title, fontSize: 10, alignment: 'left' },
@@ -61,6 +66,10 @@ const Download: React.FC = () => {
     }
   }
 
+  /** Fetch data from the database.
+   *   @returns {IVacation[]} - The vacation data fetched from the database.
+   *   @throws {Error} - If an error occurs while fetching data.
+   */
   const fetchData = async (): Promise<IVacation[] | undefined> => {
     try {
       setLoading(true)
@@ -76,12 +85,13 @@ const Download: React.FC = () => {
     }
   }
 
+  /**  Generate a PDF based on the data present in the database. */
   const handleCreatePDF = async () => {
     const data = await fetchData()
     if (!data) return console.error('Error fetching data')
     const docDefinition = createTableSchema(data)
     const pdfGenerator = pdfMake.createPdf(docDefinition)
-    pdfGenerator.download()
+    return pdfGenerator.download()
   }
 
   return (

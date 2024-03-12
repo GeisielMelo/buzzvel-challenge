@@ -18,7 +18,9 @@ const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
     data && data.scheduledAt ? data.scheduledAt : undefined,
   )
 
-  
+  /** Update the vacation based on provided data.
+   *   @param {Date} scheduledAt - The selected date on calendar.
+   */
   const handleUpdateSchedule = async (scheduledAt: Date) => {
     if (scheduledAt === data.scheduledAt) return
 

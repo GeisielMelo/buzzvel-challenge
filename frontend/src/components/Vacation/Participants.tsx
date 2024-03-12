@@ -35,6 +35,10 @@ const Participants: React.FC<{ data: IVacation }> = ({ data }) => {
     },
   })
 
+  /** Submit the form and update the vacation based on provided data.
+   *  Create a copy of the original data and push the new participant to the participants array.
+   *  @returns {Promise<void>} - A promise that resolves when the vacation is updated.
+   */
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true)
