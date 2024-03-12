@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import pdfMake from 'pdfmake/build/pdfmake'
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { Button } from '../ui/button'
 import { DownloadIcon } from '@radix-ui/react-icons'
 import VacationService from '@/api/VacationService'
@@ -9,7 +9,19 @@ import { AxiosError } from 'axios'
 import handleConvertDate from '@/utils/handleConvertDate'
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+interface CustomVfs {
+  [fontName: string]: string
+}
+
+interface CustomPdfMake {
+  vfs: CustomVfs
+}
+
+const customPdfMake: CustomPdfMake = {
+  vfs: pdfFonts.pdfMake.vfs,
+}
+
+pdfMake.vfs = customPdfMake.vfs
 
 /** Initiate a PDF download based on the current data present in the database. */
 const Download: React.FC = () => {
