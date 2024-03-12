@@ -30,7 +30,7 @@ const VacationAdd: React.FC = () => {
 
   const formSchema = z.object({
     title: z.string().min(3, { message: 'Title must be at least 3 characters long.' }),
-    description: z.string().min(3, { message: 'Description must be at least 3 characters long.' }),
+    description: z.string().min(10, { message: 'Description must be at least 10 characters long.' }),
     location: z.string().min(3, { message: 'Location must be at least 3 characters long.' }),
   })
 
