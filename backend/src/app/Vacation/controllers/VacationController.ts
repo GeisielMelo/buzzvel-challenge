@@ -40,7 +40,7 @@ class VacationController {
       await database.connect()
       const vacation = await Vacation.create(req.body)
       if (!vacation) throw new VacationError('Fail on vacation creation.')
-      return res.status(200).json(vacation)
+      return res.status(201).json(vacation)
     } catch (error) {
       if (error instanceof VacationError) {
         return res.status(400).json({ message: error.message })
