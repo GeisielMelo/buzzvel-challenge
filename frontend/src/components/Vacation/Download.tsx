@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Button } from '../ui/button'
 import { DownloadIcon } from '@radix-ui/react-icons'
 import VacationService from '@/api/VacationService'
