@@ -33,7 +33,6 @@ class ValidateUserInput {
   validateParticipants(participants: string[]) {
     if (!participants) return
     if (!Array.isArray(participants)) throw new VacationError('Participants must be an array')
-    if (participants.length < 1) throw new VacationError('Participants must have at least 1 member')
   }
 
   validateScheduledAt(scheduledAt: Date) {
