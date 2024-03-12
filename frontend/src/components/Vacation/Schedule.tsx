@@ -7,6 +7,10 @@ import { IVacation } from '@/types/IVacation'
 import { AxiosError } from 'axios'
 import handleConvertDate from '@/utils/handleConvertDate'
 
+/** Schedule Widget
+ *  @param {IVacation} data - The vacation data provided by the parent component.
+ *  @returns {JSX.Element} - A custom widget that popover a calendar and allow the vacation update based on provided data.
+ */
 const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
   const { updateVacation } = useTable()
   const [loading, setLoading] = useState<boolean>(false)
@@ -14,6 +18,9 @@ const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
     data && data.scheduledAt ? data.scheduledAt : undefined,
   )
 
+  /** Update the vacation based on provided data.
+   *   @param {Date} scheduledAt - The selected date on calendar.
+   */
   const handleUpdateSchedule = async (scheduledAt: Date) => {
     if (scheduledAt === data.scheduledAt) return
 

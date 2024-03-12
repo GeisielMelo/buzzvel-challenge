@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 import { AxiosError } from 'axios'
 import { IVacation } from '@/types/IVacation'
@@ -18,7 +19,15 @@ type TableProviderProps = {
 
 const TableContext = createContext<TableContextProps | undefined>(undefined)
 
-// eslint-disable-next-line react-refresh/only-export-components
+/** Custom hook to access the TableContext.
+ *  @var data - The data of the table.
+ *  @var loading - The loading state of the table.
+ *  @function setData - Set the data of the table.
+ *  @function addVacation - Add a new vacation to the table.
+ *  @function deleteVacation - Remove a vacation from the table.
+ *  @function updateVacation - Update a vacation in the table.
+ *  @example  const { data, addVacation } = useTable()
+ */
 export const useTable = () => {
   const context = useContext(TableContext)
   if (!context) {
@@ -27,6 +36,7 @@ export const useTable = () => {
   return context
 }
 
+/** TableProvider - Allows child components to utilize the useTable() hook. */
 export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
   const [data, setData] = useState<IVacation[] | []>([])
   const [loading, setLoading] = useState<boolean>(false)
@@ -48,14 +58,16 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     if (data.length === 0) fetchData()
   }, [])
 
+  /** Add a new document to the database and include it in the context data. */
   const addVacation = async (values: IVacation) => {
     const response = await VacationService.create(values as IVacation)
     if (response.status === 201) setData([...data, response.data])
-     else {
+    else {
       throw new Error('Something gone wrong on create vacation.')
     }
   }
 
+  /** Remove a document from the database and context data. */
   const deleteVacation = async (id: string) => {
     const response = await VacationService.findAndDelete(id)
     if (response.status === 200) {
@@ -65,6 +77,7 @@ export const TableProvider: React.FC<TableProviderProps> = ({ children }) => {
     }
   }
 
+  /** Update a document in the database and context data. */
   const updateVacation = async (id: string, values: IVacation) => {
     const response = await VacationService.findAndUpdate(id, values)
     if (response.status === 200) {
