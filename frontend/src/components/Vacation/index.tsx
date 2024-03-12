@@ -14,10 +14,21 @@ import { useState } from 'react'
 import Schedule from './Schedule'
 import Participants from './Participants'
 
+/** Table component
+ *
+ * This component is responsible for receiving the 'data' from the TableContext and distributing it among its child components.
+ * @param {IVacation[]} data - The vacation data provided by the parent component.
+ * @returns {JSX.Element} - UI that displays information and allows data updating and removal.
+ */
 const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
   const { deleteVacation } = useTable()
   const [loading, setLoading] = useState(false)
 
+  /** Call deleteVacation function from the TableContext and handle the response.
+   *   @param {string} id - The id of the vacation to be deleted.
+   *   @throws {Error} - If an error occurs during the deletion process.
+   *   @function setLoading() Control state of loading while the async function is running.
+   */
   const handleDelete = async (id: string) => {
     try {
       setLoading(true)

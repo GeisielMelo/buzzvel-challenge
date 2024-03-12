@@ -24,6 +24,13 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 
+/** Add a new plan
+ *  
+ *  The dialog contains a form to add a new vacation.
+ *
+ *  if the imputed data is not a acceptable return a red message.
+ *  @returns {JSX.Element} - A custom button that opens a dialog to add a new vacation.
+ */
 const VacationAdd: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const { addVacation } = useTable()
