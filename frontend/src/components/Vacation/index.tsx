@@ -11,18 +11,12 @@ import {
 import { TrashIcon } from '@radix-ui/react-icons'
 import { useTable } from '@/context/TableContext'
 import { useState } from 'react'
+import Schedule from './Schedule'
+import Participants from './Participants'
 
 const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
   const { deleteVacation } = useTable()
   const [loading, setLoading] = useState(false)
-
-  const handleConvertDate = (rawData: Date) => {
-    return new Date(rawData).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
-  }
 
   const handleDelete = async (id: string) => {
     try {
@@ -53,13 +47,14 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
             <TableCell>{element.title}</TableCell>
             <TableCell>{element.description}</TableCell>
             <TableCell>{element.location}</TableCell>
-            <TableCell className='flex flex-wrap gap-2'>
+            <TableCell className='flex flex-wrap gap-2 capitalize'>
+              <Participants data={element} />
               {element.participants?.map((member, _key) => (
                 <p key={_key}>{member}</p>
               ))}
             </TableCell>
             <TableCell>
-              {element.scheduledAt ? handleConvertDate(element.scheduledAt) : '---'}
+              <Schedule data={element} />
             </TableCell>
             <TableCell>
               <button
