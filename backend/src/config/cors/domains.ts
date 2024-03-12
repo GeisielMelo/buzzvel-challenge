@@ -11,7 +11,7 @@ const development = [
   'http://localhost:5000',
 ]
 
-const production = ['']
+const production = ['https://buzzvel-challenge-client.vercel.app']
 
 const domains = nodeEnv === 'development' ? development : production
 
