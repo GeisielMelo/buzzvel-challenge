@@ -5,6 +5,7 @@ import { CalendarIcon, UpdateIcon } from '@radix-ui/react-icons'
 import { useTable } from '@/context/TableContext'
 import { IVacation } from '@/types/IVacation'
 import { AxiosError } from 'axios'
+import handleConvertDate from '@/utils/handleConvertDate'
 
 const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
   const { updateVacation } = useTable()
@@ -12,14 +13,6 @@ const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
   const [date, setDate] = useState<Date | undefined>(
     data && data.scheduledAt ? data.scheduledAt : undefined,
   )
-
-  const handleConvertDate = (rawData: Date) => {
-    return new Date(rawData).toLocaleDateString('en-US', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })
-  }
 
   const handleUpdateSchedule = async (scheduledAt: Date) => {
     if (scheduledAt === data.scheduledAt) return
