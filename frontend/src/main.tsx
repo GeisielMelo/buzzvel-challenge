@@ -1,11 +1,13 @@
 import './styles/global.css'
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-
+import { TableProvider } from './context/TableContext.tsx'
+import { StrictMode } from 'react'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <TableProvider>
+      <App />
+    </TableProvider>
+  </StrictMode>,
 )
