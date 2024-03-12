@@ -1,5 +1,5 @@
-import VacationError from 'app/Vacation/exceptions/VacationError'
-import VacationService from 'app/Vacation/services/VacationService'
+import VacationError from '../app/Vacation/exceptions/VacationError'
+import VacationService from '../app/Vacation/services/VacationService'
 import { NextFunction, Request, Response } from 'express'
 
 export default (req: Request, res: Response, next: NextFunction) => {

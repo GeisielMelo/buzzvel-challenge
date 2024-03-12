@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import vacation from '../Vacation/controllers/VacationController'
-import IdentityMiddleware from 'middlewares/IdentityMiddleware'
-import InputMiddleware from 'middlewares/InputMiddleware'
+import IdentityMiddleware from '../../middlewares/IdentityMiddleware'
+import InputMiddleware from '../../middlewares/InputMiddleware'
 
 const routes = Router()
 

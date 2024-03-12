@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import database from 'database'
+import database from '../../../database'
 import VacationError from '../exceptions/VacationError'
-import Vacation from 'database/models/Vacation'
+import Vacation from '../../../database/models/Vacation'
 
 class VacationController {
   async show(req: Request, res: Response) {
