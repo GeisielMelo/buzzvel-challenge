@@ -8,14 +8,31 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { TrashIcon } from '@radix-ui/react-icons'
+import { useTable } from '@/context/TableContext'
+import { useState } from 'react'
 
 const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
+  const { deleteVacation } = useTable()
+  const [loading, setLoading] = useState(false)
+
   const handleConvertDate = (rawData: Date) => {
     return new Date(rawData).toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
     })
+  }
+
+  const handleDelete = async (id: string) => {
+    try {
+      setLoading(true)
+      await deleteVacation(id)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -43,6 +60,15 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
             </TableCell>
             <TableCell>
               {element.scheduledAt ? handleConvertDate(element.scheduledAt) : '---'}
+            </TableCell>
+            <TableCell>
+              <button
+                onClick={() => handleDelete(element._id)}
+                className='text-red-400 disabled:text-slate-200 disabled:cursor-progress'
+                disabled={loading}
+              >
+                <TrashIcon />
+              </button>
             </TableCell>
           </TableRow>
         ))}
