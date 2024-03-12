@@ -1,3 +1,4 @@
+/** Reference for managing data within the components. */
 export type IVacation = {
   _id: string
   title: string

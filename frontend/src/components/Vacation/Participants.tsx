@@ -11,6 +11,10 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Button } from '../ui/button'
 import { AxiosError } from 'axios'
 
+/** Participants Widget
+ *  @param {IVacation} data - The vacation data provided by the parent component.
+ *  @returns {JSX.Element} - A custom widget that popover a list of participants and allow the vacation update based on provided data.
+ */
 const Participants: React.FC<{ data: IVacation }> = ({ data }) => {
   const [loading, setLoading] = useState(false)
   const { updateVacation } = useTable()
