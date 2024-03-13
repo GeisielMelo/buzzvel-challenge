@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import pdfMake from 'pdfmake/build/pdfmake'
-import * as pdfFonts from 'pdfmake/build/vfs_fonts'
+// import * as pdfMake from 'pdfmake/build/pdfmake'
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { Button } from '../ui/button'
 import { DownloadIcon } from '@radix-ui/react-icons'
 import VacationService from '@/api/VacationService'
@@ -8,20 +8,19 @@ import { IVacation } from '@/types/IVacation'
 import { AxiosError } from 'axios'
 import handleConvertDate from '@/utils/handleConvertDate'
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
+import 'pdfmake/build/vfs_fonts'
+import pdfMake from "pdfmake/build/pdfmake.min";
 
-interface CustomVfs {
-  [fontName: string]: string
+
+pdfMake.fonts = {
+  Roboto: {
+    normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
+    bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
+    italics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
+    bolditalics:
+      'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf',
+  },
 }
-
-interface CustomPdfMake {
-  vfs: CustomVfs
-}
-
-const customPdfMake: CustomPdfMake = {
-  vfs: pdfFonts.pdfMake.vfs,
-}
-
-pdfMake.vfs = customPdfMake.vfs
 
 /** Initiate a PDF download based on the current data present in the database. */
 const Download: React.FC = () => {
