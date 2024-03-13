@@ -13,8 +13,10 @@ const App: React.FC = () => {
       <main className='flex flex-col max-w-5xl w-full gap-4 p-4'>
         <div className='flex flex-col sm:flex-row gap-4 items-center w-full'>
           <h1 className='text-2xl font-bold'>Holiday Planning</h1>
-          <Download />
-          <Add />
+          <div className='flex gap-4 ml-0 sm:ml-auto'>
+            <Download />
+            <Add />
+          </div>
         </div>
         <div className='flex justify-center p-6 border rounded-md'>
           {loading ? <UpdateIcon className='animate-spin' /> : <Table data={data} />}
