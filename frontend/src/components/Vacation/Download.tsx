@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
+import { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { Button } from '../ui/button'
 import { DownloadIcon } from '@radix-ui/react-icons'
-import VacationService from '@/api/VacationService'
 import { IVacation } from '@/types/IVacation'
 import { AxiosError } from 'axios'
+import VacationService from '@/api/VacationService'
 import handleConvertDate from '@/utils/handleConvertDate'
-import { TDocumentDefinitions } from 'pdfmake/interfaces'
 import pdfMake from 'pdfmake/build/pdfmake'
-// import pdfMake from "pdfmake/build/pdfmake.min"
+import handleConvertParticipants from '@/utils/handleConvertParticipants'
 
 type PdfMakeType = typeof pdfMake
 
-function registerRobotoFonts(pdfMake: PdfMakeType): void {
+/** Register the Roboto font for PDF generation.
+ *   @type {PdfMakeType} pdfMake - The PDFMake library.
+ */
+const registerRobotoFonts = (pdfMake: PdfMakeType): void => {
   pdfMake.fonts = {
     Roboto: {
       normal:
@@ -36,7 +39,11 @@ const Download: React.FC = () => {
       { text: element.title, fontSize: 10, alignment: 'left' },
       { text: element.description, fontSize: 10, alignment: 'left' },
       { text: element.location, fontSize: 10, alignment: 'left' },
-      { text: 'Ana, Clara, Marcos, Geisiel' || '', fontSize: 10, alignment: 'left' },
+      {
+        text: (element.participants && handleConvertParticipants(element.participants)) || '',
+        fontSize: 10,
+        alignment: 'left',
+      },
       {
         text: (element.scheduledAt && handleConvertDate(element.scheduledAt)) || '--/--/----',
         fontSize: 10,
