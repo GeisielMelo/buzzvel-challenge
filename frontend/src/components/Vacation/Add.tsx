@@ -25,7 +25,7 @@ import {
 } from '@/components/ui/form'
 
 /** Add a new plan
- *  
+ *
  *  The dialog contains a form to add a new vacation.
  *
  *  if the imputed data is not a acceptable return a red message.
@@ -37,7 +37,9 @@ const VacationAdd: React.FC = () => {
 
   const formSchema = z.object({
     title: z.string().min(3, { message: 'Title must be at least 3 characters long.' }),
-    description: z.string().min(10, { message: 'Description must be at least 10 characters long.' }),
+    description: z
+      .string()
+      .min(10, { message: 'Description must be at least 10 characters long.' }),
     location: z.string().min(3, { message: 'Location must be at least 3 characters long.' }),
   })
 
@@ -65,7 +67,7 @@ const VacationAdd: React.FC = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='outline' className='flex items-center gap-2'>
+        <Button variant='outline' className='flex items-center gap-2' data-cy='add-vacation'>
           <span>New</span>
           <PlusCircledIcon className='h-4 w-4' />
         </Button>
@@ -85,7 +87,7 @@ const VacationAdd: React.FC = () => {
                   <FormItem>
                     <FormLabel className='text-right'>Title</FormLabel>
                     <FormControl>
-                      <Input className='col-span-3' type='text' {...field} />
+                      <Input className='col-span-3' type='text' {...field} data-cy='form-title' />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -101,7 +103,12 @@ const VacationAdd: React.FC = () => {
                   <FormItem>
                     <FormLabel className='text-right'>Location</FormLabel>
                     <FormControl>
-                      <Input className='col-span-3' type='text' {...field} />
+                      <Input
+                        className='col-span-3'
+                        type='text'
+                        {...field}
+                        data-cy='form-location'
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -117,7 +124,12 @@ const VacationAdd: React.FC = () => {
                   <FormItem>
                     <FormLabel className='text-right'>Description</FormLabel>
                     <FormControl>
-                      <Input className='col-span-3' type='text' {...field} />
+                      <Input
+                        className='col-span-3'
+                        type='text'
+                        {...field}
+                        data-cy='form-description'
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,11 +144,12 @@ const VacationAdd: React.FC = () => {
                   disabled={loading}
                   variant='outline'
                   onClick={() => form.reset()}
+                  data-cy='form-reset'
                 >
                   Cancel
                 </Button>
               </DialogClose>
-              <Button type='submit' variant='default' disabled={loading}>
+              <Button type='submit' variant='default' disabled={loading} data-cy='form-submit'>
                 {loading ? <UpdateIcon className='animate-spin' /> : 'Add'}
               </Button>
             </DialogFooter>

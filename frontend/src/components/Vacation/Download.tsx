@@ -115,6 +115,7 @@ const Download: React.FC = () => {
 
   return (
     <Button
+      data-cy='download-pdf'
       variant='outline'
       className='flex items-center gap-2 ml-auto'
       disabled={loading}
