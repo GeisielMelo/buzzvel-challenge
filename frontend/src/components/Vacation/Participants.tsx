@@ -23,6 +23,8 @@ const Participants: React.FC<{ data: IVacation }> = ({ data }) => {
     participant: z
       .string()
       .min(3, { message: 'At least 3 characters long.' })
+      .max(24, { message: 'No more than 24 characters allowed.' })
+      .regex(/^[a-zA-Z]+$/, { message: 'Only letters (A-Z, a-z) are allowed.' })
       .refine((value) => !data.participants || !data.participants.includes(value), {
         message: 'Participant already added.',
       }),
