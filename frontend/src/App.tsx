@@ -1,8 +1,7 @@
 import { UpdateIcon } from '@radix-ui/react-icons'
+import { useTable } from './context/TableContext'
 import Table from './components/Vacation'
 import Add from './components/Vacation/Add'
-import { useTable } from './context/TableContext'
-
 import Download from './components/Vacation/Download'
 
 const App: React.FC = () => {
@@ -14,7 +13,7 @@ const App: React.FC = () => {
         <div className='flex flex-col sm:flex-row gap-4 items-center w-full'>
           <h1 className='text-2xl font-bold'>Holiday Planning</h1>
           <div className='flex gap-4 ml-0 sm:ml-auto'>
-            <Download />
+            <Download/>
             <Add />
           </div>
         </div>

@@ -11,7 +11,7 @@ import handleConvertDate from '@/utils/handleConvertDate'
  *  @param {IVacation} data - The vacation data provided by the parent component.
  *  @returns {JSX.Element} - A custom widget that popover a calendar and allow the vacation update based on provided data.
  */
-const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
+const Schedule: React.FC<{ data: IVacation, dataCy: string }> = ({ data, dataCy }) => {
   const { updateVacation } = useTable()
   const [loading, setLoading] = useState<boolean>(false)
   const [date, setDate] = useState<Date | undefined>(
@@ -44,7 +44,7 @@ const Schedule: React.FC<{ data: IVacation }> = ({ data }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button>
+        <button data-cy={dataCy}>
           {date ? (
             <div className='flex gap-2 items-center'>
               {loading ? (

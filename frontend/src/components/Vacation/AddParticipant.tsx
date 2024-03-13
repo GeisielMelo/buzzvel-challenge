@@ -15,7 +15,7 @@ import { AxiosError } from 'axios'
  *  @param {IVacation} data - The vacation data provided by the parent component.
  *  @returns {JSX.Element} - A custom widget that popover a list of participants and allow the vacation update based on provided data.
  */
-const AddParticipant: React.FC<{ data: IVacation }> = ({ data }) => {
+const AddParticipant: React.FC<{ data: IVacation; dataCy: string }> = ({ data, dataCy }) => {
   const [loading, setLoading] = useState(false)
   const { updateVacation } = useTable()
 
@@ -60,7 +60,7 @@ const AddParticipant: React.FC<{ data: IVacation }> = ({ data }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button>
+        <button data-cy={dataCy}>
           <PlusIcon />
         </button>
       </PopoverTrigger>
@@ -74,7 +74,12 @@ const AddParticipant: React.FC<{ data: IVacation }> = ({ data }) => {
                 return (
                   <FormItem>
                     <FormControl>
-                      <Input className='col-span-3' type='text' {...field} />
+                      <Input
+                        className='col-span-3'
+                        type='text'
+                        {...field}
+                        data-cy='participant-input'
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -82,7 +87,7 @@ const AddParticipant: React.FC<{ data: IVacation }> = ({ data }) => {
               }}
             />
 
-            <Button type='submit' variant='outline' disabled={loading}>
+            <Button type='submit' variant='outline' disabled={loading} data-cy='participant-submit'>
               {loading ? <UpdateIcon className='animate-spin' /> : <PlusIcon />}
             </Button>
           </form>

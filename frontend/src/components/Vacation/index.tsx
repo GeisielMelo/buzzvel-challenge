@@ -61,16 +61,17 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
               {element.participants?.map((member, _key) => (
                 <Participant key={_key} member={member} element={element} />
               ))}
-              <AddParticipant data={element} />
+              <AddParticipant data={element} dataCy={`add-participant-${key}`} />
             </TableCell>
             <TableCell>
-              <Schedule data={element} />
+              <Schedule data={element} dataCy={`open-calendar-${key}`}/>
             </TableCell>
             <TableCell>
               <button
                 onClick={() => handleDelete(element._id)}
                 className='text-red-400 disabled:text-slate-200 disabled:cursor-progress'
                 disabled={loading}
+                data-cy={`delete-item-${key}`}
               >
                 <TrashIcon />
               </button>
