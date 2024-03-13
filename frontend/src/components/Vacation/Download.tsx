@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-// import * as pdfMake from 'pdfmake/build/pdfmake'
-// import * as pdfFonts from 'pdfmake/build/vfs_fonts'
 import { Button } from '../ui/button'
 import { DownloadIcon } from '@radix-ui/react-icons'
 import VacationService from '@/api/VacationService'
@@ -10,7 +8,6 @@ import handleConvertDate from '@/utils/handleConvertDate'
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
 import 'pdfmake/build/vfs_fonts'
 import pdfMake from "pdfmake/build/pdfmake.min";
-
 
 pdfMake.fonts = {
   Roboto: {
