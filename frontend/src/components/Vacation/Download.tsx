@@ -6,18 +6,22 @@ import { IVacation } from '@/types/IVacation'
 import { AxiosError } from 'axios'
 import handleConvertDate from '@/utils/handleConvertDate'
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
-import 'pdfmake/build/vfs_fonts'
-import pdfMake from "pdfmake/build/pdfmake.min";
+import pdfMake from 'pdfmake/build/pdfmake'
+// import pdfMake from "pdfmake/build/pdfmake.min"
 
-pdfMake.fonts = {
-  Roboto: {
-    normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
-    bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
-    italics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
-    bolditalics:
-      'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf',
-  },
+type PdfMakeType = typeof pdfMake
+
+function registerRobotoFonts(pdfMake: PdfMakeType): void {
+  pdfMake.fonts = {
+    Roboto: {
+      normal:
+        'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
+      bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
+    },
+  }
 }
+
+registerRobotoFonts(pdfMake)
 
 /** Initiate a PDF download based on the current data present in the database. */
 const Download: React.FC = () => {
