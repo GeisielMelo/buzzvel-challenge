@@ -2,7 +2,6 @@ import { IVacation } from '@/types/IVacation'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -12,7 +11,8 @@ import { TrashIcon } from '@radix-ui/react-icons'
 import { useTable } from '@/context/TableContext'
 import { useState } from 'react'
 import Schedule from './Schedule'
-import Participants from './Participants'
+import AddParticipant from './AddParticipant'
+import Participant from './Participant'
 
 /** Table component
  *
@@ -42,14 +42,13 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
 
   return (
     <Table>
-      <TableCaption>A list of your scheduled plannings.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[100px]'>Title</TableHead>
+          <TableHead className='w-24'>Title</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Location</TableHead>
-          <TableHead>Participants</TableHead>
-          <TableHead>Holyday</TableHead>
+          <TableHead className='min-w-32'>Participants</TableHead>
+          <TableHead className='min-w-44'>Holyday</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -58,11 +57,11 @@ const VacationTable: React.FC<{ data: IVacation[] }> = ({ data }) => {
             <TableCell>{element.title}</TableCell>
             <TableCell>{element.description}</TableCell>
             <TableCell>{element.location}</TableCell>
-            <TableCell className='flex flex-wrap gap-2 capitalize'>
-              <Participants data={element} />
+            <TableCell className='flex flex-wrap gap-2 capitalize max-w-36 w-full'>
               {element.participants?.map((member, _key) => (
-                <p key={_key}>{member}</p>
+                <Participant key={_key} member={member} element={element} />
               ))}
+              <AddParticipant data={element} />
             </TableCell>
             <TableCell>
               <Schedule data={element} />
