@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# buzzvel-challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Complete application split between frontend and backend.
 
-Currently, two official plugins are available:
+## Deploy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You can access the Frontend deploy right [here](https://buzzvel-challenge-client.vercel.app).
 
-## Expanding the ESLint configuration
+You can access the Backend deploy right [here](https://buzzvel-challenge-server.vercel.app).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Present on application
 
-- Configure the top-level `parserOptions` property like this:
+- Plan Management Interface  
+- Holiday Plan Display
+- PDF Generation Integration
+- Form Validation
+- Documentation
+- Responsive Design
+- API Development
+- Additional Guidelines
+- Modern front-end frameworks
+- Best practices
+- Handle errors gracefully
+- Version control
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## How to setup localy
+
+```bash
+# Before all configure the .env files on each backend and frotend folders.
+# There is a example file called .env.example on each folder.
+
+Backend
+# Open your terminal, navigate to the backend folder.
+$ npm install
+$ npm run dev
+
+Frontend
+# Open your terminal, navigate to the frontend folder.
+$ npm install
+$ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Running tests
+
+Frontend: navigate to the frontend folder and run the following command:
+```bash
+npx cypress open
+```
+Backend: navigate to the backend folder and run the following command:
+```bash
+npm run test
+```
+
+## Authors
+
+- [@GeisielMelo](https://github.com/GeisielMelo)
