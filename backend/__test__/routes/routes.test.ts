@@ -1,6 +1,5 @@
 import { IVacation } from '../../src/database/models/Vacation'
 import App from '../../src/app'
-import database from '../../src/database'
 import request from 'supertest'
 
 describe('API RESPONSE', () => {
@@ -10,10 +9,6 @@ describe('API RESPONSE', () => {
   beforeAll(() => {
     server = new App()
     server.listen(3000)
-  })
-
-  afterAll(() => {
-    database.disconnect()
   })
 
   // Create
