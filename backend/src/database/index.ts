@@ -1,25 +1,45 @@
-import mongoose, { Connection } from 'mongoose'
+/* eslint-disable no-useless-catch */
+import mongoose from 'mongoose'
 import config from '../config'
 
-class Database {
-  connection!: Connection
-
-  async connect() {
-    try {
-      if (this.connection && this.connection.readyState === 1) return
-      await mongoose.connect(config.database.mongo.uri as string)
-    } catch (error) {
-      throw new Error('Database: Failed to connect.')
-    }
-  }
-
-  async disconnect() {
-    try {
-      await mongoose.disconnect()
-    } catch (error) {
-      throw new Error('Database: Failed to disconnect.')
-    }
-  }
+type MongooseConnection = {
+  db: mongoose.Connection
+  client: mongoose.Mongoose
 }
 
-export default new Database()
+const mongoService = (function () {
+  let connectionInstance: MongooseConnection | null = null
+
+  async function getInstance(): Promise<MongooseConnection> {
+    if (connectionInstance) {
+      return connectionInstance
+    }
+
+    try {
+      const { uri } = config.database.mongo
+      const client: mongoose.Mongoose = await mongoose.connect(uri as string)
+
+      const db: mongoose.Connection = mongoose.connection
+      connectionInstance = { db, client }
+
+      return connectionInstance
+    } catch (err) {
+      throw err
+    }
+  }
+
+  function getDb(): mongoose.Connection {
+    if (!connectionInstance || !connectionInstance.db) {
+      throw new Error('DB connection is not initialized')
+    }
+
+    return connectionInstance.db
+  }
+
+  return {
+    getInstance,
+    getDb,
+  }
+})()
+
+export default mongoService

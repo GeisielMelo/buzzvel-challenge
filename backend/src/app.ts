@@ -2,6 +2,7 @@ import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import routes from './routes'
 import corsOptions from './config/cors'
+import mongoService from './database'
 
 export default class App {
   app: Application
@@ -9,15 +10,19 @@ export default class App {
   constructor() {
     this.app = express()
 
+    this.database()
     this.middlewares()
     this.routes()
-    this.exceptionHandler()
   }
 
   listen(port: number): void {
     this.app.listen(port, () => {
       console.log(`\x1b[32m[server] Server started on port \x1b[33m${port}\x1b[32m!\x1b[0m`)
     })
+  }
+
+  private database() {
+    mongoService.getInstance()
   }
 
   private middlewares() {
@@ -32,7 +37,7 @@ export default class App {
 
   private exceptionHandler() {
     this.app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-      console.log(`Exception handler: '${err.name} - ${err.message}'.`)
+      console.error(err.message)
       next()
     })
   }
